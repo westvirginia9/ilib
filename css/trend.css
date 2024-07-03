@@ -1,0 +1,139 @@
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  background: linear-gradient(to bottom, #5990E2, #07247F);
+  display: flex;
+  flex-direction: column;
+  background-attachment: fixed; /* Mengunci latar belakang */
+}
+
+ul {
+  list-style-type: none;
+  margin: 40px 0 0; /* Adjust top margin to move the ul downwards */
+  padding: 0;
+  overflow: hidden;
+  background-color: transparent;
+  padding-left: 150px;
+  display: flex;
+  align-items: center;
+}
+
+li {
+  margin-right: 20px;
+}
+
+li.search-bar {
+  margin-left: auto;
+}
+
+li.profile-icon {
+  margin-left: 10px; /* Adjust spacing between search bar and profile icon */
+}
+
+li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-family: 'Kadwa', sans-serif;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+li a:hover {
+  background-color: #111;
+}
+
+li.logo-kontes {
+  display: flex;
+  align-items: center;
+}
+
+.logo-kontes .logo {
+  height: 30px; /* Adjust logo height */
+  margin-right: 8px;
+}
+
+.search-bar input[type="text"] {
+  padding: 6px;
+  margin-top: 8px;
+  margin-bottom: 8px;
+  font-size: 17px;
+  border: none;
+  border-radius: 4px;
+  width: 250px; /* Adjust width of the search input */
+}
+
+.profile-icon img {
+  width: 25px; /* Adjust size of the profile icon */
+  height: 25px; /* Match height to maintain aspect ratio */
+  border-radius: 50%; /* Optional: Round the corners if it's a circular icon */
+}
+
+.profile-icon1 img {
+  width: 60px;
+  height: 60px;
+  position: relative;
+  left: -100px; /* Geser 10px ke kiri, sesuaikan nilainya */
+}
+.trend-section {
+  display: flex;
+  justify-content: space-between;
+}
+
+.content {
+  flex: 1;
+  margin: 80px;
+  margin-top: 50px;
+  background-color: rgba(255, 255, 255, 0.2); /* Warna putih dengan 20% transparansi */
+}
+
+
+.buku-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.buku-populer {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.buku-item {
+  flex: 1 1 30%; /* Atur ukuran item buku sesuai kebutuhan */
+  margin: 5px;
+}
+
+.buku-item img {
+  width: 150px; /* Mengatur lebar gambar */
+  height: 300px ; /* Mengatur tinggi gambar */
+  object-fit: cover; /* Memastikan gambar tetap proporsional */
+  border-radius: 30px;
+}
+.buku-info .eye-icon {
+  width: 20px;
+  height: 20px;
+  margin-left: 55px; /* Jarak antara eye icon dan jumlah pembaca */
+  margin-right: 5px; /* Jarak antara eye icon dan jumlah pembaca */
+  filter: invert(100%); /* Ubah warna icon menjadi putih */
+}
+.readers {
+  margin-top: -22px;
+  margin-left: 80px;
+  color: white;
+  font-family: 'Kadwa', sans-serif; /* Menggunakan font Kadwa */
+}
+.buku-info{
+  margin-left: -15px;
+}
+.ini-gmbar{
+  margin-left: 30px;
+}
+.t{
+  color: white;
+  margin-left: 20px;
+}

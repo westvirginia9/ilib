@@ -1,0 +1,119 @@
+html, body {
+    height: 100%;
+    margin: 0;
+  }
+  
+  body {
+    background: linear-gradient(to bottom, #5990E2, #07247F);
+    display: flex;
+    flex-direction: column;
+    background-attachment: fixed; /* Mengunci latar belakang */
+  } 
+  
+  ul {
+    list-style-type: none;
+    margin: 40px 0 0; /* Adjust top margin to move the ul downwards */
+    padding: 0;
+    overflow: hidden;
+    background-color: transparent;
+    padding-left: 150px;
+    display: flex;
+    align-items: center;
+  }
+  
+  li {
+    margin-right: 20px;
+  }
+  
+  li.search-bar {
+    margin-left: auto;
+  }
+  
+  li.profile-icon {
+    margin-left: 10px; /* Adjust spacing between search bar and profile icon */
+  }
+  
+  li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-family: 'Kadwa', sans-serif;
+    font-weight: bold;
+    font-size: 20px;
+  }
+  
+  li a:hover {
+    background-color: #111;
+  }
+  
+  li.logo-kontes {
+    display: flex;
+    align-items: center;
+  }
+  
+  .logo-kontes .logo {
+    height: 30px; /* Adjust logo height */
+    margin-right: 8px;
+  }
+  
+  .search-bar input[type="text"] {
+    padding: 6px;
+    margin-top: 8px;
+    margin-bottom: 8px;
+    font-size: 17px;
+    border: none;
+    border-radius: 4px;
+    width: 250px; /* Adjust width of the search input */
+  }
+  
+  .profile-icon img {
+    width: 25px; /* Adjust size of the profile icon */
+    height: 25px; /* Match height to maintain aspect ratio */
+    border-radius: 50%; /* Optional: Round the corners if it's a circular icon */
+  }
+  
+  .profile-icon1 img {
+    width: 60px;
+    height: 60px;
+    position: relative;
+    left: -100px; /* Geser 10px ke kiri, sesuaikan nilainya */
+  }
+  .kontes-container {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 70px;
+}
+.kontes {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    width: 20%; /* Mengurangi lebar elemen kontes */
+    text-align: center;
+    padding: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background-color: rgba(217, 217, 217, 0.5); /* Warna D9D9D9 dengan opacity 0.5 */
+}
+.kontes img {
+    max-width: 120px;
+    height: auto;
+    border-radius: 8px;
+}
+.kontes h3 {
+    margin: 10px 0;
+}
+.rating {
+    margin: 10px 0;
+}
+.join-button {
+    background-color: #005CE5;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    text-decoration: none;
+}
+.join-button:hover {
+    background-color: #005CE5;
+}

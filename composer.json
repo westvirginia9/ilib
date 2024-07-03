@@ -1,0 +1,6 @@
+{
+    "require": {
+        "midtrans/midtrans-php": "^2.5",
+        "lucianotonet/groq-php": "^0.0.4"
+    }
+}
