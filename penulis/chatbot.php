@@ -20,18 +20,17 @@ if ($conn->connect_error) {
 // Ambil user_id dari sesi
 $user_id = $_SESSION['user_id'];
 
-// Ambil chat history dari database
+// Ambil riwayat chat dari database
 $chatHistory = [];
-$stmt = $conn->prepare("SELECT user_message, bot_response FROM chat WHERE user_id = ? ORDER BY created_at");
+$stmt = $conn->prepare("SELECT user_message, bot_response FROM chat WHERE user_id = ?");
 $stmt->bind_param("i", $user_id);
 $stmt->execute();
 $result = $stmt->get_result();
-
 while ($row = $result->fetch_assoc()) {
     $chatHistory[] = $row;
 }
-
 $stmt->close();
+
 $conn->close();
 ?>
 
