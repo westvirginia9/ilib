@@ -1,6 +1,5 @@
 <?php
 session_start();
-
 if (!isset($_SESSION['role']) || $_SESSION['role'] != 'pembaca') {
     header('Location: ../index.php');
     exit();
@@ -17,6 +16,24 @@ if ($conn->connect_error) {
 }
 
 $book_id = isset($_GET['book_id']) ? intval($_GET['book_id']) : 0;
+$author_id = isset($_GET['author_id']) ? intval($_GET['author_id']) : 0;
+$amount = isset($_GET['amount']) ? floatval($_GET['amount']) : 0.0;
+$admin_fee = isset($_GET['admin_fee']) ? floatval($_GET['admin_fee']) : 0.0;
+
+// Perbarui saldo penulis
+$stmt = $conn->prepare("UPDATE users SET balance = balance + ? WHERE id = ?");
+$stmt->bind_param("di", $amount, $author_id);
+$stmt->execute();
+$stmt->close();
+
+// Perbarui saldo admin
+$admin_id = 1; // Misal admin memiliki id 1
+$stmt = $conn->prepare("UPDATE users SET balance = balance + ? WHERE id = ?");
+$stmt->bind_param("di", $admin_fee, $admin_id);
+$stmt->execute();
+$stmt->close();
+
+// Perbarui status pembayaran dan tambahkan ke tabel payments
 $user_id = $_SESSION['user_id'];
 $payment_result = isset($_GET['result']) ? json_decode(urldecode($_GET['result']), true) : null;
 
@@ -49,6 +66,7 @@ if ($payment_result && $payment_result['status_code'] == '200') {
         $stmt->bind_param("i", $book_id);
         $stmt->execute();
 
+        // Redirect ke halaman untuk membaca buku
         header("Location: ../read-book.php?book_id=$book_id");
     } else {
         echo "Gagal menyimpan data pembayaran: " . $stmt->error;

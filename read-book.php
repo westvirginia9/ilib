@@ -21,7 +21,7 @@ $book_id = isset($_GET['book_id']) ? intval($_GET['book_id']) : 0;
 $user_id = $_SESSION['user_id'];
 
 // Cek apakah pengguna telah membayar untuk buku ini
-$sql = "SELECT * FROM payments WHERE user_id = ? AND book_id = ?";
+$sql = "SELECT * FROM rentals WHERE reader_id = ? AND book_id = ? AND payment_status = 'paid'";
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("ii", $user_id, $book_id);
 $stmt->execute();
@@ -42,8 +42,8 @@ if (!$book) {
 }
 
 // Tentukan path file yang akan diakses
-$preview_path = "uploads/preview/" . $book['preview_file'];
-$full_path = "uploads/full/" . $book['full_file'];
+$preview_path = "/uploads/preview/" . $book['preview_file'];
+$full_path = "/uploads/full/" . $book['full_file'];
 $file_path = $hasPaid ? $full_path : $preview_path;
 
 // Log untuk debugging
