@@ -29,7 +29,7 @@ try {
 
     if (!empty($_POST['message'])) {
         $userMessage = htmlspecialchars($_POST['message']);
-        $contextData = "Anda bernama Asisten ilib, Anda siap membantu penulis di ilib untuk melakukan analisis atau menjawab pertanyaan dari penulis dari ilib. Jawablah semua pertanyaan dalam bahasa Indonesia.";
+        $contextData = "Anda adalah asisten untuk penulis di ilib, Anda siap membantu pertanyaan terkait data penulis seperti buku, jumlah pembaca, pendapatan, dan analisis pendapatan. selalu jawab menggunakan bahasa indonesia.";
 
         if (strpos($userMessage, 'genre buku apa yang paling banyak dibaca') !== false || strpos($userMessage, 'jenis buku apa') !== false) {
             $stmt = $conn->prepare("SELECT b.genre, COUNT(r.id) AS count 
@@ -157,7 +157,7 @@ try {
             'messages' => [
                 [
                     'role'    => 'system',
-                    'content' => 'Anda bernama Asisten ilib, Anda siap membantu penulis di ilib untuk melakukan analisis atau menjawab pertanyaan dari penulis dari ilib. Anda berhak mengakses ke data buku pengguna, Jawablah semua pertanyaan dalam bahasa Indonesia.'
+                    'content' => 'Anda adalah asisten untuk penulis di ilib, Anda siap membantu pertanyaan terkait data penulis seperti buku, jumlah pembaca, pendapatan, dan analisis pendapatan. selalu jawab menggunakan bahasa indonesia.'
                 ],
                 [
                     'role'    => 'user',

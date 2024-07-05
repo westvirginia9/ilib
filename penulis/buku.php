@@ -114,7 +114,7 @@ $conn->close();
         <?php foreach ($books as $book): ?>
         <div class="book-slot">
           <img src="<?php echo htmlspecialchars($book['cover_image']); ?>" alt="">
-          <p><?php echo htmlspecialchars($book['title']); ?></p>
+          
         </div>
         <?php endforeach; ?>
         <div class="book-slot" onclick="showForm()">

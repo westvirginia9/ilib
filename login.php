@@ -81,6 +81,19 @@ session_start();
             color: red;
             margin-bottom: 20px;
         }
+        .form-footer {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+        }
+        .form-footer a {
+            text-decoration: none;
+            color: #2575fc;
+            font-size: 14px;
+        }
+        .form-footer a:hover {
+            text-decoration: underline;
+        }
     </style>
 </head>
 <body>
@@ -99,7 +112,10 @@ session_start();
                 <label>
                     <input type="checkbox" name="remember"> Remember me
                 </label>
-                <a href="#" style="margin-bottom: 20px;">Forgot password?</a>
+                <div class="form-footer">
+                    <a href="#">Forgot password?</a>
+                    <a href="register.php">Register</a>
+                </div>
                 <button type="submit">Login</button>
             </form>
             <?php

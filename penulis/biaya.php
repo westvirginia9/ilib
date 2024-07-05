@@ -41,6 +41,7 @@ $conn->close();
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" type="text/css" href="../csspengguna/databuku.css">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <title>Biaya</title>
   <style>
     body {
@@ -135,6 +136,53 @@ $conn->close();
         color: green;
         font-weight: bold;
     }
+    .book-table button {
+        padding: 5px 10px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+    .book-table button:hover {
+        background-color: #0056b3;
+    }
+    .modal {
+        display: none; 
+        position: fixed; 
+        z-index: 1; 
+        left: 0;
+        top: 0;
+        width: 100%; 
+        height: 100%; 
+        overflow: auto; 
+        background-color: rgba(0,0,0,0.4); 
+        padding-top: 60px;
+    }
+
+    .modal-content {
+        background-color: #fefefe;
+        margin: 5% auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 80%; 
+        border-radius: 8px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    }
+
+    .close {
+        color: #aaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+    }
+
+    .close:hover,
+    .close:focus {
+        color: black;
+        text-decoration: none;
+        cursor: pointer;
+    }
   </style>
 </head>
 <body>
@@ -142,8 +190,7 @@ $conn->close();
     <img class="gambar" src="../gambar/image.png" alt="Logo">
     <ul>
         <li><a href="dashbord.php">Dashboard</a></li>
-        
-      </ul>
+    </ul>
   </div>
   <div class="content">
     <div class="header">
@@ -164,6 +211,7 @@ $conn->close();
             <th>ID Buku</th>
             <th>Masa Berlaku</th>
             <th>Harga</th>
+            <th>Aksi</th>
           </tr>
           <?php foreach ($books as $book): ?>
           <tr>
@@ -172,10 +220,59 @@ $conn->close();
             <td><?php echo htmlspecialchars($book['id']); ?></td>
             <td><?php echo htmlspecialchars($book['rental_period']); ?></td>
             <td>Rp. <?php echo number_format($book['rental_price'], 2, ',', '.'); ?></td>
+            <td>
+              <button onclick="showEditModal(<?php echo $book['id']; ?>, '<?php echo $book['title']; ?>', <?php echo $book['rental_price']; ?>)">Edit</button>
+            </td>
           </tr>
           <?php endforeach; ?>
         </table>
     </div>
   </div>
+
+  <!-- Modal untuk mengedit harga -->
+  <div id="editModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal()">&times;</span>
+      <h2>Edit Harga</h2>
+      <form id="editForm" method="POST" action="update_price.php">
+        <input type="hidden" id="bookId" name="book_id">
+        <label for="bookTitle">Nama Buku:</label>
+        <input type="text" id="bookTitle" name="book_title" readonly>
+        <label for="newPrice">Harga Baru:</label>
+        <input type="number" id="newPrice" name="new_price" required>
+        <button type="submit">Update</button>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    function showEditModal(bookId, bookTitle, rentalPrice) {
+      document.getElementById('bookId').value = bookId;
+      document.getElementById('bookTitle').value = bookTitle;
+      document.getElementById('newPrice').value = rentalPrice;
+      document.getElementById('editModal').style.display = 'block';
+    }
+
+    function closeModal() {
+      document.getElementById('editModal').style.display = 'none';
+    }
+
+    window.onclick = function(event) {
+      if (event.target == document.getElementById('editModal')) {
+        closeModal();
+      }
+    }
+
+    // Tampilkan SweetAlert jika ada pesan
+    <?php if (isset($_SESSION['message'])): ?>
+      Swal.fire({
+        title: 'Informasi',
+        text: '<?php echo $_SESSION['message']; ?>',
+        icon: 'info',
+        confirmButtonText: 'OK'
+      });
+      <?php unset($_SESSION['message']); ?>
+    <?php endif; ?>
+  </script>
 </body>
 </html>
