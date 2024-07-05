@@ -11,7 +11,6 @@ $username = "root";
 $password = "";
 $dbname = "ilib3";
 
-// Buat koneksi
 $conn = new mysqli($servername, $username, $password, $dbname);
 if ($conn->connect_error) {
     die("Koneksi gagal: " . $conn->connect_error);
@@ -42,8 +41,8 @@ if (!$book) {
 }
 
 // Tentukan path file yang akan diakses
-$preview_path = "/uploads/preview/" . $book['preview_file'];
-$full_path = "/uploads/full/" . $book['full_file'];
+$preview_path = "uploads/preview/" . $book['preview_file'];
+$full_path = "uploads/full/" . $book['full_file'];
 $file_path = $hasPaid ? $full_path : $preview_path;
 
 // Log untuk debugging

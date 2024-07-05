@@ -1,7 +1,6 @@
 <?php
 session_start();
 
-// Periksa apakah pengguna sudah login dan merupakan admin
 if (!isset($_SESSION['role']) || $_SESSION['role'] != 'admin') {
     header('Location: ../index.php');
     exit();
@@ -12,14 +11,11 @@ $username = "root";
 $password = "";
 $dbname = "ilib3";
 
-// Buat koneksi ke database
 $conn = new mysqli($servername, $username, $password, $dbname);
 if ($conn->connect_error) {
     die("Koneksi gagal: " . $conn->connect_error);
 }
 
-// Ambil data untuk grafik
-// Contoh: Mengambil data jumlah pengguna
 $sql = "SELECT COUNT(*) AS count, role FROM users GROUP BY role";
 $result = $conn->query($sql);
 $usersData = [];
@@ -27,20 +23,13 @@ while ($row = $result->fetch_assoc()) {
     $usersData[] = $row;
 }
 
-// Ambil data untuk pemasukan dari saldo admin
-$admin_id = 1; // Misal admin memiliki id 1
-$sql = "SELECT balance FROM users WHERE id = ?";
-$stmt = $conn->prepare($sql);
-$stmt->bind_param("i", $admin_id);
-$stmt->execute();
-$result = $stmt->get_result();
+$sql = "SELECT date, SUM(income) as total_income FROM daily_income GROUP BY date";
+$result = $conn->query($sql);
 $incomeData = [];
-if ($row = $result->fetch_assoc()) {
-    $incomeData[] = ['date' => date('Y-m-d'), 'total_income' => $row['balance']];
+while ($row = $result->fetch_assoc()) {
+    $incomeData[] = $row;
 }
-$stmt->close();
 
-// Ambil data untuk peserta kontes
 $sql = "SELECT COUNT(*) AS count, contest_id FROM contest_participants GROUP BY contest_id";
 $result = $conn->query($sql);
 $contestData = [];
@@ -57,7 +46,7 @@ $conn->close();
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" type="text/css" href="../csspengguna/dashbord.css">
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> <!-- Include Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> 
   <title>Dashboard</title>
 </head>
 <body>
@@ -137,7 +126,7 @@ $conn->close();
         var incomeLabels = incomeData.map(function(data) { return data.date; });
         var incomeTotals = incomeData.map(function(data) { return data.total_income; });
 
-        var ctxBar = document.getElementById('barChart').getContext('2d');
+        var ctxBar = document.getElementById('barChart12').getContext('2d');
         new Chart(ctxBar, {
             type: 'bar',
             data: {

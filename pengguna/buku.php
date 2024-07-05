@@ -36,8 +36,8 @@ $conn->close();
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" type="text/css" href="../css/styles.css">
-  <script src="https://app.sandbox.midtrans.com/snap/snap.js" data-client-key="YOUR_CLIENT_KEY"></script>
-  <script src="../js/script.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="https://app.sandbox.midtrans.com/snap/snap.js" data-client-key="SB-Mid-client-wGHeB_77sjrLoW2O"></script>
   <title>Buku</title>
   <style>
     /* CSS for Modal */
@@ -123,6 +123,50 @@ $conn->close();
       background-color: #008CBA;
       color: white;
     }
+
+    /* CSS for Gallery Navigation */
+    .image-gallery {
+      display: flex;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .gallery-wrapper {
+      display: flex;
+      transition: transform 0.5s ease;
+    }
+
+    .gallery-item {
+      flex: 0 0 20%;
+      max-width: 20%;
+    }
+
+    .gallery-image {
+      width: 100%;
+      height: auto;
+      cursor: pointer;
+    }
+
+    .nav-button {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background-color: rgba(0, 0, 0, 0.5);
+      color: white;
+      border: none;
+      padding: 10px;
+      cursor: pointer;
+      z-index: 2;
+    }
+
+    .nav-button.left {
+      left: 10px;
+    }
+
+    .nav-button.right {
+      right: 10px;
+    }
   </style>
 </head>
 <body>
@@ -135,6 +179,7 @@ $conn->close();
   <li><a href="trend.php">trend</a></li>
   <li><a href="pembaca.php">buku</a></li>
   <li><a href="tentang.php">tentang</a></li>
+  <li><a href="rental_and_contest.php">Anda</a></li>
   <li class="search-bar">
     <input type="text" placeholder="Cari...." name="search">
   </li>
@@ -142,12 +187,17 @@ $conn->close();
     <img src="../gambar/22965342.jpg" alt="Profile Icon">
   </li>
 </ul>
+
 <div class="image-gallery">
-  <?php foreach ($books as $book): ?>
-  <div class="gallery-item" onclick="showBookDetails(<?php echo htmlspecialchars(json_encode($book)); ?>)">
-    <img src="<?php echo htmlspecialchars($book['cover_image']); ?>" alt="Cover Buku" class="gallery-image">
+  <button class="nav-button left" onclick="scrollGallery(-1)">&#10094;</button>
+  <div class="gallery-wrapper">
+    <?php foreach ($books as $book): ?>
+    <div class="gallery-item" onclick="showBookDetails(<?php echo htmlspecialchars(json_encode($book)); ?>)">
+      <img src="<?php echo htmlspecialchars($book['cover_image']); ?>" alt="Cover Buku" class="gallery-image">
+    </div>
+    <?php endforeach; ?>
   </div>
-  <?php endforeach; ?>
+  <button class="nav-button right" onclick="scrollGallery(1)">&#10095;</button>
 </div>
 
 <div id="bookModal" class="modal">
@@ -163,12 +213,31 @@ $conn->close();
     </div>
     <div class="modal-footer">
       <button id="readButton" class="preview-button">Preview</button>
-      <button id="rentButton" class="rent-button">Sewa</button> <!-- Tambahkan tombol Sewa -->
+      <button id="rentButton" class="rent-button">Sewa</button>
     </div>
   </div>
 </div>
 
 <script>
+const galleryWrapper = document.querySelector('.gallery-wrapper');
+let scrollPosition = 0;
+
+function scrollGallery(direction) {
+  const itemWidth = document.querySelector('.gallery-item').offsetWidth;
+  const galleryWidth = galleryWrapper.scrollWidth;
+  const visibleWidth = document.querySelector('.image-gallery').offsetWidth;
+
+  scrollPosition += direction * itemWidth;
+
+  if (scrollPosition < 0) {
+    scrollPosition = 0;
+  } else if (scrollPosition > galleryWidth - visibleWidth) {
+    scrollPosition = galleryWidth - visibleWidth;
+  }
+
+  galleryWrapper.style.transform = `translateX(-${scrollPosition}px)`;
+}
+
 function showBookDetails(book) {
   document.getElementById('bookTitle').innerText = book.title;
   document.getElementById('bookAuthor').innerText = "Penulis: " + book.author_name;
@@ -176,11 +245,25 @@ function showBookDetails(book) {
   document.getElementById('bookDate').innerText = "Terunggah: " + book.created_at;
 
   document.getElementById('readButton').onclick = function() {
-    window.location.href = '../read-book.php?book_id=' + book.id + '&page=1';
+    Swal.fire({
+      title: 'Anda membaca preview buku',
+      text: book.title,
+      icon: 'info',
+      confirmButtonText: 'OK'
+    }).then(() => {
+      window.location.href = '../read-book.php?book_id=' + book.id + '&page=1';
+    });
   };
 
   document.getElementById('rentButton').onclick = function() {
-    window.location.href = '../php/payment.php?book_id=' + book.id;
+    Swal.fire({
+      title: 'Mulai Pembayaran',
+      text: 'Anda akan diarahkan ke halaman pembayaran.',
+      icon: 'info',
+      confirmButtonText: 'Lanjutkan'
+    }).then(() => {
+      window.location.href = '../php/payment.php?book_id=' + book.id;
+    });
   };
 
   document.getElementById('bookModal').style.display = "block";
@@ -195,7 +278,12 @@ window.onclick = function(event) {
     closeModal();
   }
 }
+
+// Ensure this function is globally accessible
+window.showBookDetails = showBookDetails;
 </script>
 
 </body>
 </html>
+
+

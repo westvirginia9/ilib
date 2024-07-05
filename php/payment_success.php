@@ -33,6 +33,12 @@ $stmt->bind_param("di", $admin_fee, $admin_id);
 $stmt->execute();
 $stmt->close();
 
+// Insert or update daily income
+$stmt = $conn->prepare("INSERT INTO daily_income (date, income) VALUES (CURDATE(), ?) ON DUPLICATE KEY UPDATE income = income + VALUES(income)");
+$stmt->bind_param("d", $admin_fee);
+$stmt->execute();
+$stmt->close();
+
 // Perbarui status pembayaran dan tambahkan ke tabel payments
 $user_id = $_SESSION['user_id'];
 $payment_result = isset($_GET['result']) ? json_decode(urldecode($_GET['result']), true) : null;

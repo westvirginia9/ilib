@@ -1,0 +1,155 @@
+/* File: ../css/kontes.css */
+body {
+    display: flex;
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #D9D9D9;
+}
+
+.navbar {
+    width: 200px;
+    background-color: #ffffff;
+    color: white;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    padding-top: 20px;
+    box-sizing: border-box;
+}
+
+.navbar img {
+    display: block;
+    width: 80px; 
+    height: auto;
+    margin: 20px auto;
+    margin-top: 30px;
+}
+
+.navbar ul {
+    list-style-type: none;
+    padding: 0;
+    margin-top: 80px;
+}
+
+.navbar ul li {
+    padding: 15px;
+    text-align: center;
+}
+
+.navbar ul li a {
+    color: #979797;
+    text-decoration: none;
+    display: block;
+}
+
+.navbar ul li a:hover {
+    background-color: #5415BC;
+}
+
+.content {
+    margin-left: 200px;
+    padding: 20px;
+    flex-grow: 1;
+    box-sizing: border-box;
+    margin-top: -25px;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#dashboard-title {
+    margin: 0;
+    padding: 20px 0;
+}
+
+.search-profile {
+    display: flex;
+    align-items: center;
+}
+
+.search-profile input[type="text"] {
+    padding: 5px;
+    margin-right: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.profile-pic {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+.kontes-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px;
+    background-color: #f8f8f8;
+    border-radius: 10px;
+}
+
+.kontes-section {
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 20px;
+}
+
+.kontes-section h2 {
+    margin: 0 0 20px;
+    font-size: 1.5em;
+    color: #333;
+}
+
+.kontes-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.kontes-card {
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    width: 200px;
+    padding: 10px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.kontes-card img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+}
+
+.kontes-card h3 {
+    margin: 10px 0;
+    font-size: 1.2em;
+    color: #333;
+}
+
+.kontes-card .rating {
+    margin: 5px 0;
+    font-size: 0.9em;
+    color: #777;
+}
+
+.kontes-card .join-button {
+    display: inline-block;
+    padding: 10px 20px;
+    margin-top: 10px;
+    background-color: #007bff;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.kontes-card .join-button:hover {
+    background-color: #0056b3;
+}
