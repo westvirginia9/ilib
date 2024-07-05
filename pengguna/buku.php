@@ -40,6 +40,7 @@ $conn->close();
   <script src="../js/script.js" defer></script>
   <title>Buku</title>
   <style>
+    /* CSS for Modal */
     .modal {
       display: none; 
       position: fixed; 
@@ -49,17 +50,18 @@ $conn->close();
       width: 100%; 
       height: 100%; 
       overflow: auto; 
-      background-color: rgb(0,0,0); 
       background-color: rgba(0,0,0,0.4); 
       padding-top: 60px;
     }
 
     .modal-content {
-      background-color: #fefefe;
+      background-color: #fff;
       margin: 5% auto;
       padding: 20px;
       border: 1px solid #888;
-      width: 80%;
+      width: 60%;
+      border-radius: 8px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
     }
 
     .close {
@@ -74,6 +76,52 @@ $conn->close();
       color: black;
       text-decoration: none;
       cursor: pointer;
+    }
+
+    .modal-header, .modal-body, .modal-footer {
+      padding: 10px;
+    }
+
+    .modal-header {
+      border-bottom: 1px solid #eee;
+    }
+
+    .modal-footer {
+      border-top: 1px solid #eee;
+      text-align: right;
+    }
+
+    .modal-title {
+      font-size: 24px;
+      margin: 0;
+    }
+
+    .modal-body p {
+      margin: 10px 0;
+      font-size: 16px;
+      color: #333;
+    }
+
+    .modal-footer button {
+      padding: 10px 20px;
+      margin: 5px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .modal-footer button:hover {
+      opacity: 0.9;
+    }
+
+    .preview-button {
+      background-color: #4CAF50;
+      color: white;
+    }
+
+    .rent-button {
+      background-color: #008CBA;
+      color: white;
     }
   </style>
 </head>
@@ -104,13 +152,19 @@ $conn->close();
 
 <div id="bookModal" class="modal">
   <div class="modal-content">
-    <span class="close" onclick="closeModal()">&times;</span>
-    <h2 id="bookTitle"></h2>
-    <p id="bookAuthor"></p>
-    <p id="bookGenre"></p>
-    <p id="bookDate"></p>
-    <button id="readButton">Buka Buku</button>
-    <button id="rentButton">Sewa</button> <!-- Tambahkan tombol Sewa -->
+    <div class="modal-header">
+      <span class="close" onclick="closeModal()">&times;</span>
+      <h2 id="bookTitle" class="modal-title"></h2>
+    </div>
+    <div class="modal-body">
+      <p id="bookAuthor"></p>
+      <p id="bookGenre"></p>
+      <p id="bookDate"></p>
+    </div>
+    <div class="modal-footer">
+      <button id="readButton" class="preview-button">Preview</button>
+      <button id="rentButton" class="rent-button">Sewa</button> <!-- Tambahkan tombol Sewa -->
+    </div>
   </div>
 </div>
 

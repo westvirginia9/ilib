@@ -216,9 +216,7 @@ foreach ($books as $book) {
     <img class="gambar" src="../gambar/image.png" alt="Logo">
     <ul>
         <li><a href="dashbord.php">Dashboard</a></li>
-        <li><a href="buku.php">Buku</a></li>
-        <li><a href="databuku.php" class="active">Data Buku</a></li>
-        <li><a href="biaya.php">Biaya</a></li>
+        
       </ul>
   </div>
   <div class="content">
@@ -234,17 +232,17 @@ foreach ($books as $book) {
       <div class="data-box">
         <h2>Total Buku</h2>
         <p><?php echo $total_books; ?></p>
-        <p>15% bulan ini</p>
+        
       </div>
       <div class="data-box">
         <h2>Buku Aktif</h2>
         <p><?php echo $active_books_count; ?></p>
-        <p>1% bulan ini</p>
+        
       </div>
       <div class="data-box">
         <h2>Pembaca Aktif</h2>
         <p><?php echo $active_readers; ?></p>
-        <p>Statistik pembaca</p>
+        
       </div>
     </div>
     <div class="data-container2">

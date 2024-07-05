@@ -142,9 +142,7 @@ $conn->close();
     <img class="gambar" src="../gambar/image.png" alt="Logo">
     <ul>
         <li><a href="dashbord.php">Dashboard</a></li>
-        <li><a href="buku.php">Buku</a></li>
-        <li><a href="databuku.php">Data Buku</a></li>
-        <li><a href="biaya.php" class="active">Biaya</a></li>
+        
       </ul>
   </div>
   <div class="content">

@@ -27,13 +27,18 @@ while ($row = $result->fetch_assoc()) {
     $usersData[] = $row;
 }
 
-// Ambil data untuk pemasukan
-$sql = "SELECT SUM(amount) AS total_income, DATE(payment_date) AS date FROM rentals WHERE payment_status = 'paid' GROUP BY DATE(payment_date)";
-$result = $conn->query($sql);
+// Ambil data untuk pemasukan dari saldo admin
+$admin_id = 1; // Misal admin memiliki id 1
+$sql = "SELECT balance FROM users WHERE id = ?";
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("i", $admin_id);
+$stmt->execute();
+$result = $stmt->get_result();
 $incomeData = [];
-while ($row = $result->fetch_assoc()) {
-    $incomeData[] = $row;
+if ($row = $result->fetch_assoc()) {
+    $incomeData[] = ['date' => date('Y-m-d'), 'total_income' => $row['balance']];
 }
+$stmt->close();
 
 // Ambil data untuk peserta kontes
 $sql = "SELECT COUNT(*) AS count, contest_id FROM contest_participants GROUP BY contest_id";
@@ -53,7 +58,7 @@ $conn->close();
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" type="text/css" href="../csspengguna/dashbord.css">
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> <!-- Include Chart.js -->
-  <title>biaya</title>
+  <title>Dashboard</title>
 </head>
 <body>
   <div class="navbar">

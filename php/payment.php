@@ -74,26 +74,91 @@ $snapToken = \Midtrans\Snap::getSnapToken($transaction);
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" type="text/css" href="../css/payment.css">
   <title>Pembayaran</title>
   <script src="https://app.sandbox.midtrans.com/snap/snap.js" data-client-key="SB-Mid-client-wGHeB_77sjrLoW2O"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .payment-container {
+      background-color: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      max-width: 400px;
+      width: 100%;
+      text-align: center;
+    }
+    .payment-container h1 {
+      font-size: 24px;
+      margin-bottom: 10px;
+    }
+    .payment-container p {
+      font-size: 18px;
+      margin-bottom: 20px;
+    }
+    .pay-button {
+      background-color: #4CAF50;
+      color: white;
+      padding: 10px 20px;
+      font-size: 16px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    .pay-button:hover {
+      background-color: #45a049;
+    }
+    .alert {
+      margin-top: 20px;
+      padding: 10px;
+      color: #fff;
+      border-radius: 5px;
+    }
+    .alert-success {
+      background-color: #4CAF50;
+    }
+    .alert-error {
+      background-color: #f44336;
+    }
+  </style>
 </head>
 <body>
-  <h1>Pembayaran untuk "<?php echo htmlspecialchars($book['title']); ?>"</h1>
-  <p>Harga sewa: <?php echo htmlspecialchars($book['rental_price']); ?></p>
-  <button id="pay-button">Bayar</button>
+  <div class="payment-container">
+    <h1>Pembayaran untuk "<?php echo htmlspecialchars($book['title']); ?>"</h1>
+    <p>Harga sewa: Rp<?php echo number_format($book['rental_price'], 0, ',', '.'); ?></p>
+    <button id="pay-button" class="pay-button">Bayar</button>
+  </div>
 
   <script type="text/javascript">
     document.getElementById('pay-button').onclick = function(){
       snap.pay('<?php echo $snapToken; ?>', {
         onSuccess: function(result){
-          window.location.href = 'payment_success.php?book_id=<?php echo $book_id; ?>&author_id=<?php echo $author_id; ?>&amount=<?php echo $author_income; ?>&admin_fee=<?php echo $admin_fee; ?>&result=' + encodeURIComponent(JSON.stringify(result));
+          const successAlert = document.createElement('div');
+          successAlert.className = 'alert alert-success';
+          successAlert.innerText = 'Pembayaran berhasil!';
+          document.body.appendChild(successAlert);
+          setTimeout(() => {
+            window.location.href = 'payment_success.php?book_id=<?php echo $book_id; ?>&author_id=<?php echo $author_id; ?>&amount=<?php echo $author_income; ?>&admin_fee=<?php echo $admin_fee; ?>&result=' + encodeURIComponent(JSON.stringify(result));
+          }, 2000);
         },
         onPending: function(result){
           alert('Menunggu pembayaran!');
           console.log(result);
         },
         onError: function(result){
-          alert('Pembayaran gagal!');
+          const errorAlert = document.createElement('div');
+          errorAlert.className = 'alert alert-error';
+          errorAlert.innerText = 'Pembayaran gagal!';
+          document.body.appendChild(errorAlert);
           console.log(result);
         },
         onClose: function(){
