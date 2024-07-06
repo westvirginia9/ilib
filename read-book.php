@@ -41,8 +41,8 @@ if (!$book) {
 }
 
 // Tentukan path file yang akan diakses
-$preview_path = "uploads/preview/" . $book['preview_file'];
-$full_path = "uploads/full/" . $book['full_file'];
+$preview_path = "../uploads/preview/" . $book['preview_file'];
+$full_path = "../uploads/full/" . $book['full_file'];
 $file_path = $hasPaid ? $full_path : $preview_path;
 
 // Log untuk debugging
@@ -50,9 +50,9 @@ error_log("Preview path: " . $preview_path);
 error_log("Full path: " . $full_path);
 error_log("File path: " . $file_path);
 
-if (!file_exists($file_path)) {
-    die("File tidak ditemukan: " . $file_path);
-}
+// if (!file_exists($file_path)) {
+//     die("File tidak ditemukan: " . $file_path);
+// }
 
 header('Content-type: application/pdf');
 header('Content-Disposition: inline; filename="' . basename($file_path) . '"');

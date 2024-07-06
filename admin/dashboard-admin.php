@@ -45,64 +45,222 @@ $conn->close();
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" type="text/css" href="../csspengguna/dashbord.css">
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> 
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <!-- <link rel="stylesheet" type="text/css" href="../csspengguna/dashbord.css"> -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <title>Dashboard</title>
+  <style>
+    body {
+        display: flex;
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background-color: #D9D9D9;
+    }
+    
+    .navbar {
+        width: 200px;
+        background-color: #ffffff;
+        color: white;
+        height: 100vh;
+        position: fixed;
+        top: 0;
+        left: 0;
+        padding-top: 20px;
+        box-sizing: border-box;
+    }
+    
+    .navbar img {
+        display: block;
+        width: 80px;
+        height: auto;
+        margin: 20px auto;
+        margin-top: 30px;
+    }
+    
+    .navbar ul {
+        list-style-type: none;
+        padding: 0;
+        margin-top: 80px;
+    }
+    
+    .navbar ul li {
+        padding: 15px;
+        text-align: center;
+    }
+    
+    .navbar ul li a {
+        color: #979797;
+        text-decoration: none;
+        display: block;
+    }
+    
+    .navbar ul li a:hover {
+        background-color: #575757;
+    }
+    
+    .content {
+        margin-left: 200px;
+        padding: 20px;
+        flex-grow: 1;
+        box-sizing: border-box;
+        margin-top: -25px;
+    }
+    
+    .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    
+    #dashboard-title {
+        margin: 0;
+        padding: 20px 0;
+    }
+    
+    .search-profile {
+        display: flex;
+        align-items: center;
+    }
+    
+    .search-profile input[type="text"] {
+        padding: 5px;
+        margin-right: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+    
+    .profile-pic {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+    }
+    
+    .data-container {
+        background-color: #ffffff;
+        padding: 20px;
+        border-radius: 8px;
+        margin-top: 2px;
+    }
+    
+    .data-overview {
+        display: flex;
+        justify-content: space-around;
+    }
+    
+    .data-box {
+        padding: 20px;
+        border-radius: 8px;
+        text-align: center;
+        flex-grow: 1;
+        margin: 0 10px;
+    }
+    
+    .data-box h2 {
+        margin: 0;
+        font-size: 15px;
+        color: #ACACAC;
+    }
+    
+    .data-box p {
+        font-size: 2em;
+        margin: 10px 0 0;
+    }
+    
+    /* 2 */
+    .container {
+        display: flex;
+    }
+    
+    .data-container2 {
+        background-color: #ffffff;
+        padding: 20px;
+        border-radius: 8px;
+        position: relative;
+        width: 80%;
+        box-sizing: border-box;
+    }
+    
+    .data-container3 {
+        background-color: #ffffff;
+        padding: 20px;
+        border-radius: 8px;
+        position: relative;
+        width: 40%;
+        box-sizing: border-box;
+        margin-left: 10px;
+    }
+    
+    .data-container2 .status, .data-container3 .status {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        padding: 5px 10px;
+        border-radius: 5px;
+        font-size: 14px;
+        color: #333;
+    }
+    
+    .horizontal-container {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 40px;
+    }
+    
+    .horizontal-item {
+        padding: 20px;
+        border-radius: 8px;
+        width: 30%;
+        box-sizing: border-box;
+        text-align: center;
+    }
+  </style>
 </head>
 <body>
   <div class="navbar">
-    <img class="gambar" src="../gambar/image.png" alt="Logo">
+    <img src="../gambar/image.png" alt="Logo">
     <ul>
-        <li><a href="dashbord.php">Dashboard</a></li>
-        <li><a href="kontes.php">Kontes</a></li>
-        <li><a href="admin_chat.php">Chatbot</a></li>
-      </ul>
+      <li><a href="dashbord.php">Dashboard</a></li>
+      <li><a href="kontes.php">Kontes</a></li>
+      <li><a href="admin_chat.php">Chatbot</a></li>
+    </ul>
   </div>
   <div class="content">
     <div class="header">
       <h1 id="dashboard-title">Dashboard</h1>
       <div class="search-profile">
         <input type="text" placeholder="Search...">
-        <img class="profile-pic" src="../gambar/22965342.jpg" alt="Profile Picture">
+        <img src="../gambar/22965342.jpg" alt="Profile Picture" class="profile-pic">
       </div>
     </div>
-    <!-- Konten utama halaman disini -->
     <div class="container">
         <div class="data-container2">
             <div class="status">Jumlah Pengguna</div>
             <div class="horizontal-container">
-              <canvas id="donutChart"></canvas>
+                <canvas id="donutChart"></canvas>
             </div>
-          </div>
-          
-          
-        <div class="data-container3">
-            <canvas id="barChart"></canvas>
         </div>
     </div>
     <br>
     <div class="container">
         <div class="data-container2">
-            <div class="status">Pemasukan</div>
+            <div class="status">Pemasukan Harian</div>
             <div class="horizontal-container">
-              <canvas id="barChart12"></canvas>
+                <canvas id="barChart12"></canvas>
             </div>
         </div>
     </div>
     <br>
     <div class="container">
         <div class="data-container2">
-            <div class="status">Peserta kontes</div>
-            <canvas id="barChart113"></canvas>
+            <div class="status">Peserta Kontes</div>
+            <div class="horizontal-container">
+                <canvas id="barChart113"></canvas>
             </div>
         </div>
-    </div>
-    
     </div>
   </div>
   <script>
     document.addEventListener('DOMContentLoaded', function() {
-        // Data untuk jumlah pengguna
         var usersData = <?php echo json_encode($usersData); ?>;
         var userLabels = usersData.map(function(data) { return data.role; });
         var userCounts = usersData.map(function(data) { return data.count; });
@@ -122,7 +280,6 @@ $conn->close();
             }
         });
 
-        // Data untuk pemasukan
         var incomeData = <?php echo json_encode($incomeData); ?>;
         var incomeLabels = incomeData.map(function(data) { return data.date; });
         var incomeTotals = incomeData.map(function(data) { return data.total_income; });
@@ -147,7 +304,6 @@ $conn->close();
             }
         });
 
-        // Data untuk peserta kontes
         var contestData = <?php echo json_encode($contestData); ?>;
         var contestLabels = contestData.map(function(data) { return 'Kontes ' + data.contest_id; });
         var contestCounts = contestData.map(function(data) { return data.count; });
@@ -173,5 +329,8 @@ $conn->close();
         });
     });
   </script>
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>

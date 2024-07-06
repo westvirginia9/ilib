@@ -105,6 +105,7 @@ $conn->close();
     <ul>
       <li><a href="dashboard-admin.php">Dashboard</a></li>
       <li><a href="kontes.html">Kontes</a></li>
+      <li><a href="admin_chat.php">Chatbot</a></li>
     </ul>
   </div>
   <div class="content">

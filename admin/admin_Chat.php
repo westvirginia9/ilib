@@ -161,11 +161,8 @@ $conn->close();
   <div class="navbar">
     <img class="gambar" src="../gambar/image.png" alt="Logo">
     <ul>
-      <li><a href="dashbord.php">Dashboard</a></li>
-      <li><a href="buku.php">Buku</a></li>
-      <li><a href="databuku.php">Data Buku</a></li>
-      <li><a href="biaya.php">Biaya</a></li>
-      <li><a href="chatbot.php" class="active">Chatbot</a></li>
+      <li><a href="dashboard-admin.php">Dashboard</a></li>
+      <li><a href="kontes.php">kontes</a></li>
     </ul>
   </div>
   <div class="content">

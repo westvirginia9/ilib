@@ -251,7 +251,7 @@ function showBookDetails(book) {
       icon: 'info',
       confirmButtonText: 'OK'
     }).then(() => {
-      window.location.href = '../read-book.php?book_id=' + book.id + '&page=1';
+      window.location.href = '../read-book.php?book_id=' + book.id;
     });
   };
 

@@ -35,7 +35,7 @@ try {
         // Ambil data dari database sesuai dengan pertanyaan
         $contextData = '';
 
-        // Tambahkan informasi konteks umum tentang asisten ilib untuk admin
+        // konteks umum
         $contextData = "Anda adalah asisten untuk admin di ilib, Anda siap membantu pertanyaan terkait data admin seperti income harian, jumlah pengguna, peserta kontes, dan analisis pendapatan. selalu jawab menggunakan bahasa indonesia.";
 
         // Pertanyaan tentang income harian

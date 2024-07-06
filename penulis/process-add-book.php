@@ -24,17 +24,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $price = $_POST['rental_price'];
     $author_id = $_SESSION['user_id'];
 
-    // Upload cover image
     $cover_image = $_FILES['cover_image'];
     $cover_image_path = "../uploads/covers/" . uniqid() . "_" . basename($cover_image["name"]);
     move_uploaded_file($cover_image["tmp_name"], $cover_image_path);
 
-    // Upload preview file
     $preview_file = $_FILES['preview_file'];
     $preview_file_path = "../uploads/preview/" . uniqid() . "_" . basename($preview_file["name"]);
     move_uploaded_file($preview_file["tmp_name"], $preview_file_path);
 
-    // Upload full book file
     $full_file = $_FILES['full_file'];
     $full_file_path = "../uploads/full/" . uniqid() . "_" . basename($full_file["name"]);
     move_uploaded_file($full_file["tmp_name"], $full_file_path);

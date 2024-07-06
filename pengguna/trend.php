@@ -13,14 +13,15 @@ if ($conn->connect_error) {
     die("Koneksi gagal: " . $conn->connect_error);
 }
 
-// Ambil data buku yang paling banyak dibaca
-$sql = "SELECT b.id, b.title, b.cover_image, COUNT(r.id) AS reader_count 
-        FROM books b
-        LEFT JOIN rentals r ON b.id = r.book_id
-        GROUP BY b.id
-        ORDER BY reader_count DESC
-        LIMIT 3";
+// Ambil data buku yang paling banyak dibaca berdasarkan reader_count
+$sql = "SELECT id, title, cover_image, reader_count FROM books ORDER BY reader_count DESC LIMIT 3";
 $result = $conn->query($sql);
+
+// Debug output
+if ($result === false) {
+    echo "Error: " . $conn->error;
+    exit();
+}
 
 $books = [];
 while ($row = $result->fetch_assoc()) {

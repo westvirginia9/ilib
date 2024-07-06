@@ -27,7 +27,7 @@ $result = $stmt->get_result();
 
 if ($result->num_rows > 0) {
     $_SESSION['register_error'] = "Email already in use.";
-    header('Location: ../register.php');
+    header('Location: ../login.php');
     exit();
 }
 
@@ -37,7 +37,7 @@ $stmt = $conn->prepare($sql);
 $stmt->bind_param("ssss", $name, $email, $password, $role);
 
 if ($stmt->execute()) {
-    header('Location: ../index.php');
+    header('Location: ../login.php');
 } else {
     $_SESSION['register_error'] = "Error: " . $stmt->error;
     header('Location: ../register.php');
